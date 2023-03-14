@@ -1,5 +1,7 @@
 package it.polito.tdp.alien;
 
+
+import it.polito.tdp.alien.model.Dictionary;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +14,23 @@ public class EntryPoint extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml")) ;
+        Parent root = loader.load() ;
+        
+        FXMLController controller = loader.getController();
+        
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
-
+        
+        Dictionary model = new Dictionary();
+        controller.setModel(model) ;
+        
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**
